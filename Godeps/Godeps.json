@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/segmentio/segment-proxy",
+	"ImportPath": "github.com/Yesware/segment-proxy",
 	"GoVersion": "go1.6",
 	"GodepVersion": "v58",
 	"Packages": [
