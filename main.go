@@ -81,8 +81,6 @@ func main() {
 		log.Printf("serving proxy at port %v\n", *port)
 	}
 
-	http.HandleFunc(newrelic.WrapHandleFunc(app, "/", func(w http.ResponseWriter, r *http.Request) {
-		proxy.ServeHTTP(w, r)
-	}))
-	log.Fatal(http.ListenAndServe(":"+*port, proxy))
+	http.Handle(newrelic.WrapHandle(app, "/", proxy))
+	log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
