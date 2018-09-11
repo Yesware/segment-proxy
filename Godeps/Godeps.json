@@ -1,7 +1,7 @@
 {
-	"ImportPath": "github.com/Yesware/segment-proxy",
-	"GoVersion": "go1.6",
-	"GodepVersion": "v58",
+	"ImportPath": "github.com/yesware/segment-proxy",
+	"GoVersion": "go1.11",
+	"GodepVersion": "v80",
 	"Packages": [
 		"./..."
 	],
@@ -10,6 +10,41 @@
 			"ImportPath": "github.com/gorilla/handlers",
 			"Comment": "v1.1",
 			"Rev": "ee54c7b44cab12289237fb8631314790076e728b"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent/internal",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent/internal/cat",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent/internal/jsonx",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent/internal/logger",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent/internal/sysinfo",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+		},
+		{
+			"ImportPath": "github.com/newrelic/go-agent/internal/utilization",
+			"Comment": "v2.1.0",
+			"Rev": "46d73e6be8b4faeee70850d0df829e4fe00d6819"
 		}
 	]
 }

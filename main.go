@@ -2,14 +2,14 @@ package main
 
 import (
 	"flag"
+	"github.com/gorilla/handlers"
+	"github.com/newrelic/go-agent"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"os"
 	"strings"
-
-	"github.com/gorilla/handlers"
 )
 
 // singleJoiningSlash is copied from httputil.singleJoiningSlash method.
@@ -61,6 +61,12 @@ var debug = flag.Bool("debug", false, "debug mode")
 
 func main() {
 	flag.Parse()
+	config := newrelic.NewConfig(os.Getenv("NEW_RELIC_APP_NAME"), os.Getenv("NEW_RELIC_LICENSE_KEY"))
+	app, err := newrelic.NewApplication(config)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(1)
+	}
 	cdnURL, err := url.Parse("https://cdn.segment.com")
 	if err != nil {
 		log.Fatal(err)
@@ -75,5 +81,7 @@ func main() {
 		log.Printf("serving proxy at port %v\n", *port)
 	}
 
-	log.Fatal(http.ListenAndServe(":"+*port, proxy))
+	http.Handle(newrelic.WrapHandle(app, "/analytics.js/", proxy))
+	http.Handle(newrelic.WrapHandle(app, "/v1/", proxy))
+	log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
