@@ -81,6 +81,7 @@ func main() {
 		log.Printf("serving proxy at port %v\n", *port)
 	}
 
-	http.Handle(newrelic.WrapHandle(app, "/", proxy))
+	http.Handle(newrelic.WrapHandle(app, "/analytics.js/", proxy))
+	http.Handle(newrelic.WrapHandle(app, "/v1/", proxy))
 	log.Fatal(http.ListenAndServe(":"+*port, nil))
 }
