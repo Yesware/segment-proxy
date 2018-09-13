@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/gorilla/handlers"
 	"github.com/newrelic/go-agent"
 	"log"
@@ -23,6 +24,10 @@ func singleJoiningSlash(a, b string) string {
 		return a + "/" + b
 	}
 	return a + b
+}
+
+func healthCheck(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "OK")
 }
 
 // NewSegmentReverseProxy is adapted from the httputil.NewSingleHostReverseProxy
@@ -81,6 +86,7 @@ func main() {
 		log.Printf("serving proxy at port %v\n", *port)
 	}
 
+	http.HandleFunc(newrelic.WrapHandleFunc(app, "/healthcheck", healthCheck))
 	http.Handle(newrelic.WrapHandle(app, "/analytics.js/", proxy))
 	http.Handle(newrelic.WrapHandle(app, "/v1/", proxy))
 	log.Fatal(http.ListenAndServe(":"+*port, nil))
